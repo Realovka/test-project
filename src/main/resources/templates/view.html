@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User page</title>
+</head>
+<body>
+<h2 style="color: mediumblue" th:text="${'Information about user'}"></h2>
+
+<div th:if="${userAuth.getRole().name().equals('ADMIN')}">
+    <label>Click on the field if you want to change information about user </label><br>
+    <label>Username:</label>
+    <a th:href="@{/account/user/{id}/username(id=${user.getIdAccountDto()})}" th:text="${user.getUsernameAccountDto()}"/><br>
+    <label>First name:</label>
+    <a th:href="@{/account/user/{id}/firstName(id=${user.getIdAccountDto()})}" th:text="${user.getFirstNameAccountDto()}"/><br>
+    <label>Last name:</label>
+    <a th:href="@{/account/user/{id}/lastName(id=${user.getIdAccountDto()})}" th:text="${user.getLastNameAccountDto()}"/><br>
+    <p th:text="${'Role: '+user.role}"/>
+    <label>Status:</label>
+    <a th:href="@{/account/user/{id}/status(id=${user.getIdAccountDto()})}" th:text="${user.getUserStatus()}"/><br>
+</div>
+
+<div th:if="${userAuth.role.toString().equals('USER')}">
+<p th:text="${'Username: '+user.usernameAccountDto}"/>
+<p th:text="${'First name: '+user.firstNameAccountDto}"/>
+<p th:text="${'Last name: '+user.lastNameAccountDto}"/>
+<p th:text="${'Role: '+user.role}"/>
+<p th:text="${'Status: '+user.userStatus}"/>
+</div>
+
+<a th:href="@{/account/user}">Main page</a>
+<form th:action="@{/logout}" method="post">
+    <button type="submit">Sign Out</button>
+</form>
+</body>
+</html>

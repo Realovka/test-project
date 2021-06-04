@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Addition new user</title>
+</head>
+<body>
+<h2 style="color: mediumblue" th:text="${'Addition new user'}"></h2>
+<div th:text="${suchUserNameAlreadyExists}"></div>
+<form th:action="@{/account/user/new}" th:object="${userReg}" method="post">
+    <p><input type="text" th:field="*{usernameReg}" placeholder="Username"/></p>
+    <p th:if="${#fields.hasErrors('usernameReg')}" th:errors="*{usernameReg}"></p>
+    <p><input type="password" th:field="*{passwordReg}" placeholder="Password"/></p>
+    <p th:if="${#fields.hasErrors('passwordReg')}" th:errors="*{passwordReg}"></p>
+    <p><input type="text" th:field="*{firstNameReg}" placeholder="First name"/></p>
+    <p th:if="${#fields.hasErrors('firstNameReg')}" th:errors="*{firstNameReg}"></p>
+    <p><input type="text" th:field="*{lastNameReg}" placeholder="Last name"/></p>
+    <p th:if="${#fields.hasErrors('lastNameReg')}" th:errors="*{lastNameReg}"></p>
+    <select th:name="role">
+        <option>ADMIN</option>
+        <option>USER</option>
+    </select><br><br>
+    <select th:name="userStatus">
+        <option>ACTIVE</option>
+        <option>INACTIVE</option>
+    </select><br><br>
+    <button type="submit">Registration</button>
+</form>
+
+<a th:href="@{/account/user}">Main page</a>
+
+<form th:action="@{/logout}" method="post">
+    <button type="submit">Sign Out</button>
+</form>
+
+</body>
+</html>

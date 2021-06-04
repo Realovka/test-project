@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+</head>
+<body>
+<h2 style="color: mediumblue" th:text="${'Hello '+userAuth.usernameAccountDto +'!'}"></h2>
+<label>List all users</label>
+<div th:each="item:${listUsersAccount}">
+    <a th:href="@{/account/user/{id}(id=${item.getIdAccountDto()})}" th:text="${item.usernameAccountDto}"/>
+</div>
+
+<div th:if="${userAuth.role.toString().equals('ADMIN')}">
+    <a th:href="@{/account/user/new}">Registration new user</a>
+</div>
+
+<form th:action="@{/logout}" method="post">
+    <button type="submit">Sign Out</button>
+</form>
+</body>
+</html>

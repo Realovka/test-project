@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit user</title>
+</head>
+<body>
+<h2 style="color: mediumblue">Edit username</h2>
+<form th:action="@{/account/user/{id}/editUsername(id=${user.getIdAccountDto()})}" th:object="${userEdit}" method="post">
+    <p><input type="text" th:field="*{usernameEdit}" placeholder="Username"/></p>
+    <p th:if="${#fields.hasErrors('usernameEdit')}" th:errors="*{usernameEdit}"></p>
+    <button type="submit">Update</button>
+</form>
+
+<a th:href="@{/account/user}">Main page</a>
+<form th:action="@{/logout}" method="post">
+    <button type="submit">Sign Out</button>
+</form>
+
+</body>
+</html>
